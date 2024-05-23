@@ -4,8 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Header from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
-import AppProvider from "./AppProvider";
+import AppProvider from "./app-provider";
 import { cookies } from "next/headers";
+import SlideSession from "@/components/slide-session";
 
 const roboto = Roboto({ subsets: ["vietnamese"], weight: ["100", "300"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
           <Header />
           <AppProvider initialSessionToken = {sessionToken?.value}>
           {children}
+          <SlideSession />
           </AppProvider>
         </ThemeProvider>
       </body>
