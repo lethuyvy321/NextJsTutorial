@@ -1,7 +1,10 @@
 import accountApiRequest from '@/apiRequests/account'
 import { cookies } from 'next/headers'
 import ProfileForm from './profile-form'
-
+import { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: 'Hồ sơ người dùng'
+}
 export default async function MeProfile() {
   const cookieStore = cookies()
   const sessionToken = cookieStore.get('sessionToken')

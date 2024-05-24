@@ -25,7 +25,7 @@ import {
 import productApiRequest from "@/apiRequests/products";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import ProductEdit from "../[id]/page";
+import ProductEdit from "../[id]/edit/page";
 type Product = ProductResType["data"];
 const ProductAddForm = ({ product }: { product?: Product }) => {
   const [file, setFile] = useState<File | null>(null);
@@ -36,6 +36,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
   const form = useForm<CreateProductBodyType>({
     resolver: zodResolver(CreateProductBody),
     defaultValues: {
+      // ?? : nullish operator
       name: product?.name ?? '',
       price: product?.price ??   0,
       description: product?.description ??  "",
@@ -59,6 +60,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
         description: result.payload.message,
       });
       router.push("/products");
+      router.refresh()
     } catch (error: any) {
       handleErrorApi({
         error,
@@ -89,6 +91,7 @@ const ProductAddForm = ({ product }: { product?: Product }) => {
       toast({
         description: result.payload.message,
       });
+      router.refresh()
     } catch (error: any) {
       handleErrorApi({
         error,

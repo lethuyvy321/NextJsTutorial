@@ -18,10 +18,12 @@ import authApiRequest from '@/apiRequests/auth'
 import { useRouter } from 'next/navigation'
 import { handleErrorApi } from '@/lib/utils'
 import { useState } from 'react'
+import { useAppContext } from '@/app/app-provider'
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
+  const { setUser } = useAppContext()
   const router = useRouter()
   const form = useForm<LoginBodyType>({
     resolver: zodResolver(LoginBody),
@@ -45,7 +47,9 @@ const LoginForm = () => {
       toast({
         description: result.payload.message
       })
-      router.push('/me')
+      setUser(result.payload.data.account)
+      router.push('/')
+      router.refresh()
     } catch (error: any) {
       handleErrorApi({
         error,
