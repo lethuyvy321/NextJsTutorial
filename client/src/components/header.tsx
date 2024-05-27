@@ -4,18 +4,23 @@ import { ModeToggle } from "./mode-toggle";
 import ButtonLogout from "./button-logout";
 import { AccountResType } from "@/schemaValidations/account.schema";
 import { useAppContext } from "@/app/app-provider";
+import { Suspense } from "react";
 
 export default function Header() {
   const {user} = useAppContext()
   return (
     <div className="flex space-x-4">
       <ul className="flex space-x-4">
+      <Suspense>
         <li>
           <Link href="/">Home Page</Link>
         </li>
         <li>
           <Link href="/products">Sản phẩm</Link>
         </li>
+       
+
+        
         {user ? (
           <>
             <li>
@@ -37,6 +42,7 @@ export default function Header() {
             </li>
           </>
         )}
+        </Suspense>
       </ul>
       <ModeToggle />
     </div>

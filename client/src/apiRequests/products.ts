@@ -9,9 +9,7 @@ import {
 } from "@/schemaValidations/product.schema";
 
 const productApiRequest = {
-  getList: () => http.get<ProductListResType>("/products", {
-    cache: 'no-store'
-  }),
+  getList: () => http.get<ProductListResType>("/products"),
   create: (body: CreateProductBodyType) =>
     http.post<ProductResType>("/products", body),
   uploadImage: (body: FormData) =>
